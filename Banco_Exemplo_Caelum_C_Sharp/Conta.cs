@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Banco_Exemplo_Caelum_C_Sharp
 {
-    class Conta
+    public class Conta
     {
         public Conta()
         {
@@ -13,13 +13,18 @@ namespace Banco_Exemplo_Caelum_C_Sharp
         }
 
         public int Numero { get; set; }
-        public double Saldo { get; private set; }
+        public double Saldo { get; protected set; }
 
         public Cliente Titular { get; set; }
 
-        public void Deposita(double valorOperacao)
+        public virtual void Deposita(double valor)
         {
-            this.Saldo += valorOperacao;
+            this.Saldo += valor;
+        }
+
+       public virtual void Saca(double valor)
+        {
+            this.Saldo -= valor;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Banco_Exemplo_Caelum_C_Sharp
 {
     public partial class Form1 : Form
     {
-        private Conta c;
+        private Conta conta;
 
         public Form1()
         {
@@ -21,23 +21,46 @@ namespace Banco_Exemplo_Caelum_C_Sharp
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.c = new Conta();
-            this.c.Numero = 1;
+            this.conta = new ContaCorrente();
+            this.conta.Numero = 1;
             Cliente cliente = new Cliente("Victor");
-            this.c.Titular = cliente;
+            this.conta.Titular = cliente;
 
-            textoTitular.Text = c.Titular.Nome;
-            textoNumero.Text = Convert.ToString(c.Saldo);
+
+            //Exercicio 8 - capítulo 9
+          /*  this.conta.Deposita(90);
+            TotalizadorDeContas totalizador = new TotalizadorDeContas();
+            totalizador.Adiciona(conta);
+            MessageBox.Show(Convert.ToString(totalizador.SaldoTotal));
+            Conta cp = new ContaPoupanca();
+            cp.Deposita(30);
+            totalizador.Adiciona(cp);
+            MessageBox.Show(Convert.ToString(totalizador.SaldoTotal)); */
+
+            textoTitular.Text = conta.Titular.Nome;
+            textoNumero.Text = Convert.ToString(conta.Saldo);
+            textoSaldo.Text = Convert.ToString(conta.Saldo);
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void botaoDeposito_Click(object sender, EventArgs e)
         {
             string valorDigitado = textoValor.Text;
             double valorOperacao = Convert.ToDouble(valorDigitado);
-            c.Deposita(valorOperacao);
-            textoSaldo.Text = Convert.ToString(this.c.Saldo);
+            this.conta.Deposita(valorOperacao);
+            textoSaldo.Text = Convert.ToString(this.conta.Saldo);
             MessageBox.Show("Sucesso");
         }
+
+        private void botaoSaque_Click(object sender, EventArgs e)
+        {
+            string valorDigitado = textoValor.Text;
+            double valorOperacao = Convert.ToDouble(valorDigitado);
+            this.conta.Saca(valorOperacao);
+            textoSaldo.Text = Convert.ToString(this.conta.Saldo);
+            MessageBox.Show("Sucesso");
+        }
+
+       
     }
 }
