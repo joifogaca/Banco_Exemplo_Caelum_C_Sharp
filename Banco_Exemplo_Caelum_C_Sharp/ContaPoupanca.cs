@@ -10,7 +10,14 @@ namespace Banco_Exemplo_Caelum_C_Sharp
     {
         public override void Saca(double valor)
         {
-            this.Saldo -= (valor + 0.10);
+            this.Saldo -= valor; 
         }
+
+        public override void Deposita(double valor)
+        {
+            this.Saldo += valor;
+        }
+
+        
     }
 }

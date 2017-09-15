@@ -7,7 +7,7 @@ namespace Banco_Exemplo_Caelum_C_Sharp
 {
     public class Cliente
     {
-        private string p;
+       
 
         public Cliente(string nome)
         {

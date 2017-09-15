@@ -138,6 +138,22 @@ namespace Banco_Exemplo_Caelum_C_Sharp
             formularioDeCadastro.ShowDialog();
         }
 
+        private void botaoImpostos_Click(object sender, EventArgs e)
+        {
+            TotalizadorDeTributos totalizador = new TotalizadorDeTributos();
+
+            foreach  (Conta conta in contas)
+            {
+                if (conta is ITributavel)
+                { 
+                    ContaCorrente corrente = (ContaCorrente)conta;
+                    totalizador.Adiciona(corrente);                    
+                }
+            }
+            MessageBox.Show("Total de tributos = " + totalizador.Total);
+
+        }
+
       
 
        
