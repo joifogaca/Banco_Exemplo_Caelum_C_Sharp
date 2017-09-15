@@ -46,6 +46,7 @@
             this.comboTransferencia = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.Transferir = new System.Windows.Forms.Button();
+            this.botaoNovaConta = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -111,9 +112,9 @@
             this.groupBox1.Controls.Add(this.botaoDeposito);
             this.groupBox1.Controls.Add(this.textoSaldo);
             this.groupBox1.Controls.Add(this.textoValor);
-            this.groupBox1.Location = new System.Drawing.Point(41, 227);
+            this.groupBox1.Location = new System.Drawing.Point(31, 189);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(241, 195);
+            this.groupBox1.Size = new System.Drawing.Size(241, 179);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Conta";
@@ -222,11 +223,22 @@
             this.Transferir.UseVisualStyleBackColor = true;
             this.Transferir.Click += new System.EventHandler(this.Transferir_Click);
             // 
+            // botaoNovaConta
+            // 
+            this.botaoNovaConta.Location = new System.Drawing.Point(114, 390);
+            this.botaoNovaConta.Name = "botaoNovaConta";
+            this.botaoNovaConta.Size = new System.Drawing.Size(75, 23);
+            this.botaoNovaConta.TabIndex = 10;
+            this.botaoNovaConta.Text = "NovaConta";
+            this.botaoNovaConta.UseVisualStyleBackColor = true;
+            this.botaoNovaConta.Click += new System.EventHandler(this.botaoNovaConta_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(516, 487);
+            this.Controls.Add(this.botaoNovaConta);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -263,6 +275,7 @@
         private System.Windows.Forms.ComboBox comboTransferencia;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button Transferir;
+        private System.Windows.Forms.Button botaoNovaConta;
     }
 }
 

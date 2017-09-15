@@ -12,36 +12,45 @@ namespace Banco_Exemplo_Caelum_C_Sharp
 {
     public partial class Form1 : Form
     {
-        private Conta[] contas;
-        private Conta[] contasTransferencia;
+        private IList<Conta> contas;
+        private IList<Conta> contasTransferencia;
+
 
         public Form1()
         {
             InitializeComponent();
         }
 
+        public void AdcionaConta(Conta conta)
+        {
+            contas.Add(conta);
+            comboContas.Items.Add("Titular: " + conta.Titular.Nome);
+
+        
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            contas = new Conta[3];
+            contas = new List<Conta>();
 
-            this.contas[0] = new ContaCorrente();
-            this.contas[0].Numero = 1;
-            this.contas[0].Titular = new Cliente("Victor");
+            Conta c1 = new ContaCorrente();
+            c1.Numero = 1;
+            c1.Titular = new Cliente("Victor");
+            this.AdcionaConta(c1);
 
-            this.contas[1] = new ContaPoupanca();
-            this.contas[1].Numero = 2;
-            this.contas[1].Titular = new Cliente("mauricio");
+            Conta c2 = new ContaCorrente();
+            c2.Numero = 2;
+            c2.Titular = new Cliente("Mauricio");
+            this.AdcionaConta(c2);
 
-            this.contas[2] = new ContaCorrente();
-            this.contas[2].Numero = 3;
-            this.contas[2].Titular = new Cliente("osni");
+            Conta c3 = new ContaCorrente();
+            c3.Numero = 3;
+            c3.Titular = new Cliente("Osni");
+            this.AdcionaConta(c3);
 
 
-            foreach (Conta conta in contas)
-            {
-                comboContas.Items.Add("Titular: " + conta.Titular.Nome);
-            }
+            
 
             //Exercicio 8 - capítulo 9
           /*  this.conta.Deposita(90);
@@ -85,35 +94,34 @@ namespace Banco_Exemplo_Caelum_C_Sharp
 
         private void comboContas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            contasTransferencia = new Conta [3];
+            contasTransferencia = new List<Conta>();
 
-            for (int i = 0; i < 3; i++)
+          
+
+            foreach (Conta conta in contas)
             {
-                if (i == comboContas.SelectedIndex)
-                {
-                    if (i != contas.Length - 1)
-                    { contasTransferencia[i] = contas[++i]; }
-                }
-                else
-                {
-                    contasTransferencia[i] = contas[i];
+                if (!Convert.ToString(comboContas.SelectedItem).Contains(conta.Titular.Nome))
+                { comboTransferencia.Items.Add("Titular: " + conta.Titular.Nome); }
+            }
+
+            Conta selecionada;
+            string nomeCombo = Convert.ToString(comboContas.SelectedItem);
+
+            foreach (Conta conta in contas)
+            {
+                if (nomeCombo.Contains(conta.Titular.Nome))
+                { selecionada = conta;
+                textoTitular.Text = selecionada.Titular.Nome;
+                textoNumero.Text = Convert.ToString(selecionada.Numero);
+                textoSaldo.Text = Convert.ToString(selecionada.Saldo);
+                
                 }
                 
             }
 
-            foreach (Conta conta in contasTransferencia)
-            {
-                if (conta != null)
-                { comboTransferencia.Items.Add("Titular: " + conta.Titular.Nome); }
-            }
-
             
 
-            int indice = comboContas.SelectedIndex;
-            Conta selecionada = this.contas[indice];
-            textoTitular.Text = selecionada.Titular.Nome;
-            textoNumero.Text = Convert.ToString(selecionada.Numero);
-            textoSaldo.Text = Convert.ToString(selecionada.Saldo);
+            
         }
 
         private void Transferir_Click(object sender, EventArgs e)
@@ -122,6 +130,12 @@ namespace Banco_Exemplo_Caelum_C_Sharp
             contasTransferencia[comboTransferencia.SelectedIndex].Deposita(Convert.ToDouble(textoValor.Text));
             MessageBox.Show("Transferência realizada com sucesso!");
             textoSaldo.Text = Convert.ToString(contas[comboContas.SelectedIndex].Saldo);
+        }
+
+        private void botaoNovaConta_Click(object sender, EventArgs e)
+        {
+            FormCadastroConta formularioDeCadastro = new FormCadastroConta(this);
+            formularioDeCadastro.ShowDialog();
         }
 
       
