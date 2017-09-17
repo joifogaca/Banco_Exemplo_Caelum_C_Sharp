@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Banco_Exemplo_Caelum_C_Sharp.Contas;
 
 namespace Banco_Exemplo_Caelum_C_Sharp
 {
@@ -31,11 +32,13 @@ namespace Banco_Exemplo_Caelum_C_Sharp
             { novaConta = new ContaCorrente(); }
 
             novaConta.Titular = new Cliente(textoTitular.Text);
-            novaConta.Numero = Convert.ToInt32(textoNumero.Text);
-
-
 
             this.formPrincipal.AdcionaConta(novaConta);
+        }
+
+        private void FormCadastroConta_Load(object sender, EventArgs e)
+        {
+            textoNumero.Text = Convert.ToString(Conta.ProximoNumero);
         }
 
         

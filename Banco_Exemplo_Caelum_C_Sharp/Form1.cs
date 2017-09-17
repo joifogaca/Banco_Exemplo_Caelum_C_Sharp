@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Banco_Exemplo_Caelum_C_Sharp.Contas;
 
 namespace Banco_Exemplo_Caelum_C_Sharp
 {
@@ -35,22 +36,18 @@ namespace Banco_Exemplo_Caelum_C_Sharp
             contas = new List<Conta>();
 
             Conta c1 = new ContaCorrente();
-            c1.Numero = 1;
             c1.Titular = new Cliente("Victor");
             this.AdcionaConta(c1);
 
             Conta c2 = new ContaCorrente();
-            c2.Numero = 2;
             c2.Titular = new Cliente("Mauricio");
             this.AdcionaConta(c2);
 
             Conta c3 = new ContaCorrente();
-            c3.Numero = 3;
             c3.Titular = new Cliente("Osni");
             this.AdcionaConta(c3);
 
 
-            
 
             //Exercicio 8 - capítulo 9
           /*  this.conta.Deposita(90);
@@ -86,9 +83,22 @@ namespace Banco_Exemplo_Caelum_C_Sharp
 
             string valorDigitado = textoValor.Text;
             double valorOperacao = Convert.ToDouble(valorDigitado);
-            selecionada.Saca(valorOperacao);
-            textoSaldo.Text = Convert.ToString(selecionada.Saldo);
-            MessageBox.Show("Sucesso");
+            try
+            {
+                selecionada.Saca(valorOperacao);
+                textoSaldo.Text = Convert.ToString(selecionada.Saldo);
+                MessageBox.Show("Sucesso");
+            }
+            catch (SaldoInsulficienteException ex)
+            {
+
+                MessageBox.Show("Saldo insuficiente");
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show("Não é possivel sacar um valor negativo");
+            }
+            
         }
 
 
@@ -153,8 +163,6 @@ namespace Banco_Exemplo_Caelum_C_Sharp
             MessageBox.Show("Total de tributos = " + totalizador.Total);
 
         }
-
-      
 
        
     }

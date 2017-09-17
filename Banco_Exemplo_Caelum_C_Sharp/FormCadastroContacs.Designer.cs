@@ -113,6 +113,7 @@
             this.Controls.Add(this.botaoCadastro);
             this.Name = "FormCadastroConta";
             this.Text = "FormCadastroContacs";
+            this.Load += new System.EventHandler(this.FormCadastroConta_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
