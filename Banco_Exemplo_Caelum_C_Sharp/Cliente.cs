@@ -15,6 +15,11 @@ namespace Banco_Exemplo_Caelum_C_Sharp
             this.Nome = nome;
         }
 
+        public override string ToString()
+        {
+            return this.Nome;
+        }
+
         public string Nome { get; set; }
     }
 }

@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Banco_Exemplo_Caelum_C_Sharp.Contas;
 
+
 namespace Banco_Exemplo_Caelum_C_Sharp
 {
     public partial class Form1 : Form
     {
         private IList<Conta> contas;
         private IList<Conta> contasTransferencia;
+        private Dictionary<string, Conta> dicionario;
 
 
         public Form1()
@@ -25,14 +27,15 @@ namespace Banco_Exemplo_Caelum_C_Sharp
         public void AdcionaConta(Conta conta)
         {
             contas.Add(conta);
-            comboContas.Items.Add("Titular: " + conta.Titular.Nome);
+            comboContas.Items.Add(conta);
+            this.dicionario.Add(conta.Titular.Nome, conta);
 
         
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            dicionario = new Dictionary<string, Conta>();
             contas = new List<Conta>();
 
             Conta c1 = new ContaCorrente();
@@ -47,7 +50,7 @@ namespace Banco_Exemplo_Caelum_C_Sharp
             c3.Titular = new Cliente("Osni");
             this.AdcionaConta(c3);
 
-
+            comboContas.DisplayMember = "Titular";
 
             //Exercicio 8 - capítulo 9
           /*  this.conta.Deposita(90);
@@ -64,9 +67,9 @@ namespace Banco_Exemplo_Caelum_C_Sharp
 
         private void botaoDeposito_Click(object sender, EventArgs e)
         {
-            int indice = comboContas.SelectedIndex;
 
-            Conta selecionada = contas[indice];
+
+            Conta selecionada = (Conta)comboContas.SelectedItem;
 
             string valorDigitado = textoValor.Text;
             double valorOperacao = Convert.ToDouble(valorDigitado);
@@ -77,9 +80,8 @@ namespace Banco_Exemplo_Caelum_C_Sharp
 
         private void botaoSaque_Click(object sender, EventArgs e)
         {
-            int indice = comboContas.SelectedIndex;
 
-            Conta selecionada = contas[indice];
+            Conta selecionada = (Conta) comboContas.SelectedItem;
 
             string valorDigitado = textoValor.Text;
             double valorOperacao = Convert.ToDouble(valorDigitado);
@@ -111,7 +113,7 @@ namespace Banco_Exemplo_Caelum_C_Sharp
             foreach (Conta conta in contas)
             {
                 if (!Convert.ToString(comboContas.SelectedItem).Contains(conta.Titular.Nome))
-                { comboTransferencia.Items.Add("Titular: " + conta.Titular.Nome); }
+                { comboTransferencia.Items.Add(conta); }
             }
 
             Conta selecionada;
@@ -163,6 +165,28 @@ namespace Banco_Exemplo_Caelum_C_Sharp
             MessageBox.Show("Total de tributos = " + totalizador.Total);
 
         }
+
+        private void botaoBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string nomeTitular = textoBuscaTitular.Text;
+                Conta conta = dicionario[nomeTitular];
+
+                textoTitular.Text = conta.Titular.Nome;
+                textoNumero.Text = Convert.ToString(conta.Numero);
+                textoSaldo.Text = Convert.ToString(conta.Saldo);
+                comboContas.SelectedItem = conta;
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Não foi possivel encontrar esse titular"); ;
+            }
+            
+        }
+
+  
 
        
     }

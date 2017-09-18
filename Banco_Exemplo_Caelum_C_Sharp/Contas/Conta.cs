@@ -19,6 +19,11 @@ namespace Banco_Exemplo_Caelum_C_Sharp.Contas
             Conta.ProximoNumero = Conta.numeroDeContas + 1;
         }
 
+        public override string ToString()
+        {
+            return "Titular : " + this.Titular.Nome;
+        }
+
         public int Numero { get; protected set; }
         public double Saldo { get ; protected set; }
 

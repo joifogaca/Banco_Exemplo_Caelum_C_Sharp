@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Banco_Exemplo_Caelum_C_Sharp.Contas;
 
 namespace Banco_Exemplo_Caelum_C_Sharp
 {
